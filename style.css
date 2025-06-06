@@ -1,0 +1,219 @@
+body {
+  background: #1a1a2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Playfair Display', serif;
+}
+
+.proposal-scene {
+  position: relative;
+  width: 300px;
+  height: 400px;
+}
+
+/* Chest styles */
+.chest {
+  position: absolute;
+  width: 200px;
+  height: 120px;
+  bottom: 120px;
+  left: 50px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.7s ease-in-out 1s;
+}
+
+.chest-base {
+  position: absolute;
+  width: 200px;
+  height: 80px;
+  background: #8B4513;
+  border-radius: 5px;
+  bottom: 0;
+  box-shadow: 
+    inset 0 -10px 20px rgba(0,0,0,0.3),
+    0 5px 15px rgba(0,0,0,0.5);
+}
+
+.chest-lid {
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  background: #A0522D;
+  border-radius: 5px 5px 0 0;
+  top: 0;
+  transform-origin: bottom center;
+  transform: rotateX(0deg);
+  transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  box-shadow: 
+    inset 0 0 10px rgba(0,0,0,0.3),
+    0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* Ring box container */
+.ring-box-container {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 90px;
+  bottom: 100px;
+  transform: scale(0);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) 1.5s;
+  z-index: 5;
+}
+
+.ring-box {
+  position: relative;
+  width: 120px;
+  height: 80px;
+}
+
+.ring-box-base {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: #111;
+  border-radius: 0 0 5px 5px;
+  bottom: 0;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.ring-box-lid {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: #222;
+  border-radius: 5px 5px 0 0;
+  top: 0;
+  transform-origin: bottom center;
+  transform: rotateX(0deg);
+  transition: transform 1.2s ease-in-out 2.3s;
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+}
+
+.ring {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 19%;
+  bottom: 70px;
+  transform: translateY(-43%);
+  z-index: 6;
+}
+
+.band {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 8px solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #D4AF37, #F9D423, #D4AF37) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+}
+
+.diamond {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: white;
+  transform: rotate(45deg) translate(-50%, -50%);
+  top: 0;
+  left: 41%;
+  margin-top: -5px;
+  box-shadow: 
+    0 0 20px rgba(255,255,255,0.8),
+    0 0 40px rgba(255,255,255,0.6);
+  animation: glow 2s infinite alternate;
+  z-index: 7;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 
+      0 0 10px rgba(255,255,255,0.8),
+      0 0 20px rgba(255,255,255,0.6);
+  }
+  to {
+    box-shadow: 
+      0 0 20px rgba(255,255,255,1),
+      0 0 40px rgba(255,255,255,0.8),
+      0 0 60px rgba(255,255,255,0.4);
+  }
+}
+
+/* Proposal text */
+.proposal-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: white;
+  bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease-in-out 3.5s;
+}
+
+.name {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+  font-family: 'Dancing Script', cursive;
+}
+
+.question {
+  font-size: 24px;
+  font-style: italic;
+  text-shadow: 0 0 5px rgba(255,255,255,0.3);
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+  animation: sparkle-fall 2s linear forwards;
+}
+
+@keyframes sparkle-fall {
+  to {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
+
+/* Active states */
+.active .chest-lid {
+  transform: rotateX(-160deg);
+}
+
+.active .chest {
+  transform: scale(0) translateY(-50px);
+  opacity: 0;
+}
+
+.active .ring-box-container {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.active .ring-box-lid {
+  transform: rotateX(-180deg);
+}
+
+.active .proposal-text {
+  opacity: 1;
+  transform: translateY(0);
+}
